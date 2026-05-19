@@ -10,7 +10,12 @@ const sendEmail = async (
 
     const transporter =
       nodemailer.createTransport({
-        service: "gmail",
+
+        host: "smtp-relay.brevo.com",
+
+        port: 587,
+
+        secure: false,
 
         auth: {
           user: process.env.EMAIL_USER,
@@ -19,11 +24,13 @@ const sendEmail = async (
       });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+
+      from: `"Simplifiq AI Audit System" <${process.env.EMAIL_USER}>`,
 
       to,
 
-      subject: `${company} Business Audit Report`,
+      subject:
+        `${company} Business Audit Report`,
 
       text:
 `Hello,
